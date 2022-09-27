@@ -48,8 +48,8 @@ class MessageModel(db.Model):
 class MessageResource(Resource):
     @jwt_required()
     def get(self):
-        limit = 50
-        # fetch first 'limit' number of messages from db after sorting by date descending
+        limit = 1000
+        # fetch upto first 'limit' number of messages from db after sorting by date descending
         messages = MessageModel.query.order_by(MessageModel.date.desc()).limit(limit).all()
         return {'messages': [message.json() for message in messages]}, 200
 
